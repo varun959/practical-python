@@ -14,9 +14,13 @@ annual_principal_paid = 0
 total_paid = 0
 number_of_payments = 0
 #extra_payment_counter = 12 #count down to 0
-extra_payment_start_month = int(input('extra_payment_start_month: '))
-extra_payment_end_month = int(input('extra_payment_end_month: '))
-extra_payment_input = int(input('extra_payment: '))
+#extra_payment_start_month = int(input('extra_payment_start_month: '))
+#extra_payment_end_month = int(input('extra_payment_end_month: '))
+#extra_payment_input = int(input('extra_payment: '))
+
+extra_payment_start_month = 61
+extra_payment_end_month = 128
+extra_payment_input = 1000
 
 #print('year', 'principal_paid', 'principal_balance', 'interest_paid', 'cumulative_interest_paid')
 
@@ -42,21 +46,21 @@ while principal_balance > 0:
 		principal_balance = principal_balance - principal_paid
 		total_paid = total_paid + monthly_payment + extra_payment
 
-	print(month_counter, round(total_paid), round(principal_balance))
+	print(f'{month_counter:5d}', f'{round(total_paid):10d}', f'{round(principal_balance): 17d}')
 
 	annual_interest_paid = annual_interest_paid + monthly_interest
 	annual_principal_paid = annual_principal_paid + principal_paid
 	number_of_payments = number_of_payments + 1
 	month_counter_for_annual_reset = month_counter_for_annual_reset + 1
 
-	if(month_counter_for_annual_reset == 12):
-		cumulative_interest_paid = cumulative_interest_paid + annual_interest_paid
-		print('#year', year, round(annual_principal_paid), round(principal_balance), 
-			round(annual_interest_paid), round(cumulative_interest_paid), '#')
-		year = year + 1
-		annual_interest_paid = 0 #reset
-		annual_principal_paid = 0 #reset
-		month_counter_for_annual_reset = 0; #reset
+	#if(month_counter_for_annual_reset == 12):
+	#	cumulative_interest_paid = cumulative_interest_paid + annual_interest_paid
+	#	print('#year', year, round(annual_principal_paid), round(principal_balance), 
+	#		round(annual_interest_paid), round(cumulative_interest_paid), '#')
+	#	year = year + 1
+	#	annual_interest_paid = 0 #reset
+	#	annual_principal_paid = 0 #reset
+	#	month_counter_for_annual_reset = 0; #reset
 
 print('Number of payments', number_of_payments)
-print('Total paid', round(total_paid))
+print('Total paid', f'{round(total_paid):14d}')
