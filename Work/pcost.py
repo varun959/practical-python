@@ -2,12 +2,33 @@
 #
 # Exercise 1.27
 
-total_cost = 0.0
+import sys
 
-with open(r'Data/portfolio.csv', 'rt') as f:
-	next(f) #skip header
-	for line in f:
-		row = line.split(',')
-		total_cost = total_cost + int(row[1]) * float(row[2])
+def portfolio_cost(filename):
 
-print('Total cost =', total_cost)
+	total_cost = 0.0
+
+	import csv
+	f = open(filename)
+	rows = csv.reader(f)
+	headers = next(rows)
+
+	#print(headers)
+
+	for row in rows:
+		#print(row)
+		try:
+			total_cost = total_cost + int(row[1]) * float(row[2])
+		except ValueError:
+			print("Couldn't parse", row)
+
+	return total_cost
+
+if len(sys.argv) == 2:
+	print(sys.argv[1])
+	filename = sys.argv[1]
+else:
+	filename = r'Data/portfolio.csv'
+
+cost = portfolio_cost(filename)
+print('Total cost =', cost)
